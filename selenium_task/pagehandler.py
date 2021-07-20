@@ -56,13 +56,14 @@ def choose_topic(topic):
    search_topic.send_keys(topic)
    search_topic.send_keys(Keys.RETURN)
    time.sleep(1)
+   
 
-def current_tesla_price():
+def current_stock_price():
     try:
-        price_per_share = driver.find_element_by_css_selector("#quote-header-info > div > div > div > div > div > div > span[data-reactid='31']")
-        print(price_per_share.text)
+        price_per_share = driver.find_element_by_xpath('/html/body/div[1]/div/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[3]/div[1]/div[1]/span[1]')
+        print("Price is currently:",price_per_share.text + '$')
     except:
-        print("No element founded!!")
+        print("No price founded!!")
         driver.close()
 
 def close_browser():
@@ -80,5 +81,5 @@ if __name__ == "__main__":
     click_link_to_yahoo()
     agree_yahoo_terms()
     choose_topic("Tesla")
-    current_tesla_price()
+    current_stock_price()
     close_browser()
